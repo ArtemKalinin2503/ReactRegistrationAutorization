@@ -5,7 +5,8 @@ import { routerReducer } from 'react-router-redux';
 //Основной state
 export const initState = {
 	autorization: false,
-	userNew: [ { email: '', password: '' } ] //Здесь будут данные о новом позьватели
+	userNew: [ { email: '', password: '' } ], //Здесь будут данные о новом позьватели
+  userAutorization: ''
 };
 
 const mainReducer = (state = initState, action) => {
@@ -23,7 +24,13 @@ const mainReducer = (state = initState, action) => {
 			return {
 				...state,
 				userNew: userNewArr
-			};
+      };
+    //Action получает email авторизованного пользователя
+    case 'GET_USER_AUTORIZATION':
+      return {
+        ...state,
+        userAutorization: action.payload
+      }  
 		default:
 			return state;
 	}

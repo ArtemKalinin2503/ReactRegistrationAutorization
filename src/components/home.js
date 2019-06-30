@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from '../images/logo.png' // relative path to image 
 
 //Компонент  Home
 class HomeComponent extends Component {
@@ -14,7 +15,10 @@ class HomeComponent extends Component {
 	render() {
 		return (
 			<div className="home__wrapper">
-				<h1>Home</h1>
+				<div className="home__head">
+					<h3>Home</h3>
+				</div>
+        <img src={logo} className="logo"/>
 				<button className="home__btnEnter" onClick={this.handleClick}>
 					Авторизоваться
 				</button>

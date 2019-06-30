@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import Input from 'react-toolbox/lib/input';
 
-const customField = ({ input, type, placeholder, meta: { touched, error }, ...rest }) => {
+const customField = ({ input, type, placeholder, className, meta: { touched, error }, ...rest }) => {
 	return (
 		<div>
-			<input {...input} placeholder={placeholder} type={type} className="no-valid" />
-			{touched && error && <p>{error}</p>}
+      <Input type={type} label={placeholder} {...input} placeholder={placeholder} className={className} />
+      {touched && error && <p className="error">{error}</p>}
 		</div>
 	);
 };
@@ -43,9 +44,7 @@ class AutorizationForm extends Component {
 					className="autorization__input-password"
 					placeholder="Password"
 				/>
-				<button type="submit" className="autorization__button">
-					Войти
-				</button>
+        <button type="submit">Войти</button>
 			</form>
 		);
 	}

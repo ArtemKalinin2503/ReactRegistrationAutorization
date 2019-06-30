@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import Input from 'react-toolbox/lib/input';
 
 //Здесь описаеться компонент формы в данном случае input
-const customField = ({ input, type, placeholder, className,  meta: { touched, error }, ...rest }) => {
+const customField = ({ input, type, placeholder, className, meta: { touched, error }, ...rest }) => {
 	return (
 		<div>
-      <input {...input} placeholder={placeholder} type={type} className={className} />
+			<Input type={type} label={placeholder} {...input} placeholder={placeholder} className={className} />
 			{touched && error && <p className="error">{error}</p>}
 		</div>
 	);
@@ -15,11 +16,11 @@ const customField = ({ input, type, placeholder, className,  meta: { touched, er
 const myValidator = (values) => {
 	const errors = {};
 	if (!values.loginRegistration) {
-    errors.loginRegistration = 'Поле необходимо заполнить';
-  }
-  if (!values.passwordRegistration) {
-    errors.passwordRegistration = 'Поле необходимо заполнить';
-  }
+		errors.loginRegistration = 'Поле необходимо заполнить';
+	}
+	if (!values.passwordRegistration) {
+		errors.passwordRegistration = 'Поле необходимо заполнить';
+	}
 	return errors;
 };
 
@@ -44,17 +45,15 @@ class RegistrationForm extends Component {
 					className="registration__input-password"
 					placeholder="Password"
 				/>
-				<button type="submit" className="registration__button">
-					Регистрация
-				</button>
+        <button type="submit">Регистрация</button>
 			</form>
 		);
 	}
 }
 
 RegistrationForm = reduxForm({
-  form: 'registration',
-  validate: myValidator
+	form: 'registration',
+	validate: myValidator
 })(RegistrationForm);
 
 export default RegistrationForm;

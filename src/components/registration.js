@@ -19,7 +19,9 @@ class RegistrationUser extends Component {
 	render() {
 		return (
 			<div className="registartion__wrapper">
-				<h3>Регистрация</h3>
+        <div className="registartion__head">
+          <h3>Регистрация</h3>
+        </div>
 				<RegistrationForm onSubmit={this.submit} /> {/*Форма регитсрации созданная с помощью Redux-Form*/}
 			</div>
 		);

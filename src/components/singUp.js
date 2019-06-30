@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import store from '../store';
-import { actionAuthorize } from '../action';
+import { connect } from 'react-redux';
+import { actionAuthorize, actionUser } from '../action';
 import AutorizationForm from '../components/form/autorizationForm';
 
 //Компонент с формой авторизации пользователя
-class SingUpComponent extends Component {
+class SingUp extends Component {
 	//Событие submit формы Авторизации (в values приходят данные из всех input формы)
 	submit = (values) => {
 		store.dispatch(
@@ -12,7 +13,8 @@ class SingUpComponent extends Component {
 				{ email: values.loginAutorization, password: values.passwordAutorization },
 				this.props.history //Необходимо для роутинга внутри saga authorizeUser
 			)
-		);
+    );
+    store.dispatch(actionUser(values.loginAutorization));
 	};
 
 	render() {
@@ -21,11 +23,19 @@ class SingUpComponent extends Component {
 		}
 		return (
 			<div className="singUp__wrapper">
-				<h3>Авторизация</h3>
+        <div className="singUp__head">
+          <h3>Авторизация</h3>
+        </div>
 				<AutorizationForm onSubmit={this.submit} />
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = (state, ownProps = {}) => ({
+  userAutorization: state.mainReducer.userAutorization,
+});
+
+const SingUpComponent = connect(mapStateToProps)(SingUp);
 
 export default SingUpComponent;
